@@ -2,6 +2,10 @@ using ScottPlot.WinForms;
 
 namespace HeatPumpCurve;
 
+/// <summary>
+/// Main application form for the Heat Pump Heating Curve Calculator.
+/// Provides an interface to configure heating curves with visual chart and table representations.
+/// </summary>
 public partial class MainForm : Form
 {
     private HeatingCurveSettings _settings;
@@ -17,9 +21,12 @@ public partial class MainForm : Form
     private NumericUpDown num25 = null!;
     private ComboBox cmbInterpolation = null!;
 
-    // Outside temperature points (fixed)
+    // Outside temperature points (fixed) - standard reference points for heating curve
     private readonly double[] _outsideTemps = { -20, 9, 15, 20, 25 };
 
+    /// <summary>
+    /// Initializes the main form, loads saved settings, and displays the initial heating curve.
+    /// </summary>
     public MainForm()
     {
         _settings = HeatingCurveSettings.Load();
@@ -81,6 +88,9 @@ public partial class MainForm : Form
         this.Controls.Add(mainPanel);
     }
 
+    /// <summary>
+    /// Creates the input panel containing temperature inputs and control buttons.
+    /// </summary>
     private Panel CreateInputPanel()
     {
         var panel = new Panel
@@ -184,6 +194,9 @@ public partial class MainForm : Form
         return numUpDown;
     }
 
+    /// <summary>
+    /// Creates and configures the ScottPlot chart control with dark theme styling.
+    /// </summary>
     private FormsPlot CreateChart()
     {
         var plot = new FormsPlot
@@ -191,7 +204,7 @@ public partial class MainForm : Form
             Dock = DockStyle.Fill
         };
 
-        // Configure dark theme
+        // Configure dark theme to match the application aesthetic
         plot.Plot.FigureBackground.Color = ScottPlot.Color.FromHex("#1e2328");
         plot.Plot.DataBackground.Color = ScottPlot.Color.FromHex("#282d32");
         
@@ -297,8 +310,13 @@ public partial class MainForm : Form
         UpdateChartAndTable();
     }
 
+    /// <summary>
+    /// Updates both the chart visualization and data table based on current input values.
+    /// Supports both linear and smooth (cubic spline) interpolation modes.
+    /// </summary>
     private void UpdateChartAndTable()
     {
+        // Collect water temperature values from all input controls
         double[] waterTemps = {
             (double)numMinus20.Value,
             (double)num9.Value,
@@ -307,7 +325,7 @@ public partial class MainForm : Form
             (double)num25.Value
         };
 
-        // Determine interpolation mode
+        // Determine which interpolation algorithm to use
         bool useSmooth = cmbInterpolation.SelectedIndex == 0;
 
         // Generate curve points based on interpolation mode
@@ -370,6 +388,10 @@ public partial class MainForm : Form
         base.OnFormClosing(e);
     }
 
+    /// <summary>
+    /// Applies consistent styling to the plot after clearing.
+    /// Ensures dark theme and proper axis labels are maintained.
+    /// </summary>
     private void ApplyPlotStyle()
     {
         formsPlot.Plot.FigureBackground.Color = ScottPlot.Color.FromHex("#1e2328");
@@ -394,9 +416,16 @@ public partial class MainForm : Form
         formsPlot.Plot.Axes.Title.Label.FontSize = 18;
     }
 
+    /// <summary>
+    /// Performs linear interpolation between data points.
+    /// </summary>
+    /// <param name="xValues">X-axis values (outside temperatures)</param>
+    /// <param name="yValues">Y-axis values (water temperatures)</param>
+    /// <param name="x">Target x value to interpolate</param>
+    /// <returns>Interpolated y value</returns>
     private static double LinearInterpolate(double[] xValues, double[] yValues, double x)
     {
-        // Handle edge cases
+        // Clamp to boundary values if outside the range
         if (x <= xValues[0]) return yValues[0];
         if (x >= xValues[xValues.Length - 1]) return yValues[yValues.Length - 1];
 
