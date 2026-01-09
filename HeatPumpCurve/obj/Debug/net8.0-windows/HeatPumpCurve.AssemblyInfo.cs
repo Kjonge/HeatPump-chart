@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HeatPumpCurve")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a080e48035f096e10a6d01e384b58ca9ed4eba9")]
 [assembly: System.Reflection.AssemblyProductAttribute("HeatPumpCurve")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HeatPumpCurve")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

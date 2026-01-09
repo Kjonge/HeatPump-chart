@@ -33,3 +33,4 @@ D:\projects\HeatPump chart\HeatPumpCurve\bin\Debug\net8.0-windows\runtimes\osx\n
 D:\projects\HeatPump chart\HeatPumpCurve\bin\Debug\net8.0-windows\runtimes\win-arm64\native\libSkiaSharp.dll
 D:\projects\HeatPump chart\HeatPumpCurve\bin\Debug\net8.0-windows\runtimes\win-x64\native\libSkiaSharp.dll
 D:\projects\HeatPump chart\HeatPumpCurve\bin\Debug\net8.0-windows\runtimes\win-x86\native\libSkiaSharp.dll
+D:\projects\HeatPump chart\HeatPumpCurve\obj\Debug\net8.0-windows\HeatPumpCurve.sourcelink.json
